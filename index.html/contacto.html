@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto - NEXO</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="contenedor-header">
+        <h1 class="logo"><span class="mando">🎮</span> NEXO</h1>
+
+        <!-- Botón hamburguesa -->
+        <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+
+        <nav class="menu">
+          <a href="index.html">Inicio</a>
+          <a href="mouse.html">Mouse</a>
+          <a href="teclados.html">Teclados</a>
+          <a href="graficas.html">Tarjetas Gráficas</a>
+          <a href="audifonos.html">Audífonos</a>
+          <a href="juego.html">Juego</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h2>Contáctanos</h2>
+      <div class="contact-layout">
+        <div class="contact-form">
+          <form>
+            <input type="text" placeholder="Tu nombre" required />
+            <input type="email" placeholder="Tu correo" required />
+            <textarea rows="5" placeholder="Tu mensaje"></textarea>
+            <button type="submit">Enviar mensaje</button>
+          </form>
+        </div>
+        <div class="contact-map">
+          <iframe
+            src="https://www.google.com/maps?q=San+Isidro,+Lima,+Peru&output=embed"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </main>
+
+    <footer>© 2025 NEXO. Todos los derechos reservados.</footer>
+    <script src="script.js"></script>
+  </body>
+</html>
