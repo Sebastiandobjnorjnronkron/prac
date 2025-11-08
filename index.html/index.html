@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEXO - Gaming Store</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React + ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Framer Motion -->
+    <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        transition: background 0.4s, color 0.4s;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #06b6d4, #9333ea);
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <div id="root"></div>
+
+    <script type="text/babel" data-presets="env,react">
+      const { motion } = window["framerMotion"];
+
+      // 🧭 HEADER
+      const Header = ({ cartCount, toggleTheme }) => (
+        <header className="bg-gray-800 bg-opacity-60 backdrop-blur-md shadow-md py-4 sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+              🎮 NEXO
+            </h1>
+            <nav className="hidden md:flex space-x-6 font-semibold">
+              {[
+                ["Inicio", "index.html"],
+                ["Mouse", "mouse.html"],
+                ["Teclados", "teclados.html"],
+                ["Gráficas", "graficas.html"],
+                ["Audífonos", "audifonos.html"],
+                ["Juego", "juego.html"],
+                ["Contacto", "contacto.html"],
+              ].map(([name, link], i) => (
+                <a
+                  key={i}
+                  href={link}
+                  className="hover:text-cyan-400 transition-colors"
+                >
+                  {name}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-4">
+              <button
+                onClick={toggleTheme}
+                className="border border-cyan-400 text-cyan-400 px-3 py-1 rounded-lg hover:bg-cyan-400 hover:text-black transition"
+              >
+                🌙
+              </button>
+              <div className="relative">
+                <button className="text-cyan-400 text-2xl">🛒</button>
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-purple-600 text-xs px-2 rounded-full">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </header>
+      );
+
+      // 💎 PRODUCTO
+      const ProductCard = ({ item, addToCart }) => (
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          className="bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition"
+        >
+          <img
+            src={item.img}
+            alt={item.nombre}
+            className="rounded-lg mb-4 mx-auto h-40 object-cover"
+          />
+          <h3 className="text-xl font-semibold mb-1">{item.nombre}</h3>
+          <p className="text-cyan-300 font-medium mb-2">{item.precio}</p>
+          <p className="text-sm text-gray-400 mb-3">{item.desc}</p>
+          <button
+            onClick={() => addToCart(item)}
+            className="bg-gradient-to-r from-cyan-400 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:scale-105 transition"
+          >
+            🛒 Agregar
+          </button>
+        </motion.div>
+      );
+
+      // 💬 CHATBOT
+      const Chatbot = () => {
+        const [open, setOpen] = React.useState(false);
+        const [messages, setMessages] = React.useState([
+          { from: "bot", text: "¡Hola gamer! 🎮 Soy NEXO-BOT, ¿qué necesitas?" },
+        ]);
+        const [input, setInput] = React.useState("");
+
+        const sendMessage = (e) => {
+          e.preventDefault();
+          if (!input.trim()) return;
+
+          setMessages([...messages, { from: "user", text: input }]);
+          const lower = input.toLowerCase();
+
+          setTimeout(() => {
+            let reply = "😎 Estoy en desarrollo, pero pronto responderé más cosas.";
+            if (lower.includes("precio") || lower.includes("costo"))
+              reply = "💸 Tenemos productos desde S/120 hasta S/350.";
+            if (lower.includes("mouse"))
+              reply = "🖱 Podés ver nuestros mouses en la sección Mouse.";
+            if (lower.includes("teclado"))
+              reply = "⌨️ Revisá la sección Teclados para ver modelos RGB.";
+            if (lower.includes("audifono"))
+              reply = "🎧 Los audífonos gamer están espectaculares 🔥.";
+            setMessages((prev) => [...prev, { from: "bot", text: reply }]);
+          }, 600);
+
+          setInput("");
+        };
+
+        return (
+          <div className="fixed bottom-6 right-6 z-50">
+            {open ? (
+              <div className="w-80 bg-gray-800 border border-cyan-500 rounded-2xl shadow-lg flex flex-col overflow-hidden">
+                <div className="bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-bold text-center py-2">
+                  🤖 NEXO BOT
+                </div>
+                <div className="flex-1 overflow-y-auto p-3 space-y-2 text-sm max-h-80">
+                  {messages.map((msg, i) => (
+                    <div
+                      key={i}
+                      className={`p-2 rounded-lg ${
+                        msg.from === "bot"
+                          ? "bg-gray-700 text-left"
+                          : "bg-cyan-600 text-right ml-auto"
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  ))}
+                </div>
+                <form onSubmit={sendMessage} className="flex border-t border-gray-700">
+                  <input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    className="flex-1 p-2 bg-gray-700 text-white outline-none text-sm"
+                    placeholder="Escribe tu mensaje..."
+                  />
+                  <button
+                    type="submit"
+                    className="px-3 bg-cyan-500 text-black font-bold"
+                  >
+                    ➤
+                  </button>
+                </form>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="bg-red-500 hover:bg-red-600 text-white text-xs py-1"
+                >
+                  Cerrar
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setOpen(true)}
+                className="bg-gradient-to-r from-cyan-400 to-purple-600 text-white text-2xl p-4 rounded-full shadow-lg hover:scale-110 transition"
+              >
+                💬
+              </button>
+            )}
+          </div>
+        );
+      };
+
+      // 🧠 APP PRINCIPAL
+      const App = () => {
+        const [cart, setCart] = React.useState([]);
+        const [dark, setDark] = React.useState(true);
+
+        const toggleTheme = () => {
+          setDark(!dark);
+          document.body.className = dark
+            ? "bg-white text-black"
+            : "bg-gray-900 text-white";
+        };
+
+        const productos = [
+          {
+            img: "imagen3.jpg",
+            nombre: "Mouse RGB Pro",
+            precio: "S/ 120.00",
+            desc: "Sensor óptico 16.000 DPI, luces RGB y cable trenzado.",
+          },
+          {
+            img: "imagen11.jpg",
+            nombre: "Teclado Mecánico RGB",
+            precio: "S/ 180.00",
+            desc: "Switches mecánicos, retroiluminación RGB por tecla.",
+          },
+          {
+            img: "96.jpg",
+            nombre: "Audífonos Pro",
+            precio: "S/ 220.00",
+            desc: "Sonido envolvente 7.1, micrófono retráctil y RGB.",
+          },
+        ];
+
+        return (
+          <>
+            <Header cartCount={cart.length} toggleTheme={toggleTheme} />
+            <motion.main
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="max-w-7xl mx-auto px-6 py-10 text-center"
+            >
+              <h2 className="text-4xl font-bold text-cyan-400 mb-8">
+                💎 Productos Destacados
+              </h2>
+              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {productos.map((p, i) => (
+                  <ProductCard key={i} item={p} addToCart={(item) => setCart([...cart, item])} />
+                ))}
+              </div>
+            </motion.main>
+            <footer className="text-center py-6 text-gray-400 mt-10">
+              © 2025 NEXO. Todos los derechos reservados.
+            </footer>
+            <Chatbot />
+          </>
+        );
+      };
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
