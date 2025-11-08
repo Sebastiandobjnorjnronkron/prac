@@ -5,328 +5,246 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NEXO - Gaming Store</title>
 
-    <!-- Tailwind -->
+    <!-- 🎨 Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- React + ReactDOM -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-    <!-- Framer Motion -->
-    <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+    <!-- 🌀 Anime.js para animaciones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
     <style>
       body {
         font-family: "Poppins", sans-serif;
-        transition: background 0.4s, color 0.4s;
+        background-color: #0f172a;
+        color: white;
+        transition: background 0.5s, color 0.5s;
       }
+
+      /* Scroll personalizado */
       ::-webkit-scrollbar {
         width: 6px;
       }
       ::-webkit-scrollbar-thumb {
         background: linear-gradient(to bottom, #06b6d4, #9333ea);
-        border-radius: 5px;
+        border-radius: 4px;
+      }
+
+      /* Chatbot */
+      #chatbot {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 50;
+      }
+
+      #chat-window {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 320px;
+        height: 420px;
+        background-color: #1e293b;
+        border: 1px solid #06b6d4;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+      }
+
+      .chat-header {
+        background: linear-gradient(to right, #06b6d4, #9333ea);
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .chat-body {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+      }
+
+      .msg {
+        background-color: #334155;
+        padding: 8px 10px;
+        border-radius: 10px;
+        margin-bottom: 6px;
+        max-width: 80%;
+        font-size: 14px;
+      }
+
+      .msg.user {
+        background-color: #06b6d4;
+        color: black;
+        align-self: flex-end;
+      }
+
+      .chat-input {
+        display: flex;
+        border-top: 1px solid #475569;
+      }
+
+      .chat-input input {
+        flex: 1;
+        background-color: #1e293b;
+        color: white;
+        border: none;
+        padding: 10px;
+        outline: none;
+      }
+
+      .chat-input button {
+        background-color: #06b6d4;
+        color: black;
+        padding: 0 14px;
+        font-weight: bold;
       }
     </style>
   </head>
 
-  <body class="bg-gray-900 text-white">
-    <div id="root"></div>
+  <body>
+    <!-- HEADER -->
+    <header class="bg-gray-800 bg-opacity-70 backdrop-blur-md shadow-md py-4 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+          🎮 NEXO
+        </h1>
+
+        <nav class="hidden md:flex space-x-6 font-semibold">
+          <a href="index.html" class="text-cyan-400">Inicio</a>
+          <a href="mouse.html" class="hover:text-cyan-400">Mouse</a>
+          <a href="teclados.html" class="hover:text-cyan-400">Teclados</a>
+          <a href="graficas.html" class="hover:text-cyan-400">Gráficas</a>
+          <a href="audifonos.html" class="hover:text-cyan-400">Audífonos</a>
+          <a href="juego.html" class="hover:text-cyan-400">Juego</a>
+          <a href="contacto.html" class="hover:text-cyan-400">Contacto</a>
+        </nav>
+
+        <button id="theme-btn" class="border border-cyan-400 text-cyan-400 px-3 py-1 rounded-lg hover:bg-cyan-400 hover:text-black transition">
+          🌙
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="max-w-7xl mx-auto px-6 py-10 text-center">
+      <h2 class="text-4xl font-bold text-cyan-400 mb-8">💎 Productos Destacados</h2>
+
+      <div id="productos" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </main>
+
+    <footer class="text-center py-6 text-gray-400 mt-10 border-t border-gray-700">
+      © 2025 NEXO. Todos los derechos reservados.
+    </footer>
+
+    <!-- CHATBOT -->
+    <div id="chatbot">
+      <button id="chat-toggle" class="bg-gradient-to-r from-cyan-400 to-purple-600 text-white text-2xl p-4 rounded-full shadow-lg hover:scale-110 transition">
+        💬
+      </button>
+
+      <div id="chat-window">
+        <div class="chat-header">🤖 NEXO BOT</div>
+        <div id="chat-body" class="chat-body flex flex-col"></div>
+        <form id="chat-form" class="chat-input">
+          <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." />
+          <button type="submit">➤</button>
+        </form>
+      </div>
+    </div>
 
     <script>
-      const e = React.createElement;
-      const { motion } = window.framerMotion;
+      // === DATOS DE PRODUCTOS ===
+      const productos = [
+        {
+          img: "imagen3.jpg",
+          nombre: "Mouse RGB Pro",
+          precio: "S/ 120.00",
+          desc: "Sensor óptico 16.000 DPI, luces RGB y cable trenzado.",
+        },
+        {
+          img: "imagen11.jpg",
+          nombre: "Teclado Mecánico RGB",
+          precio: "S/ 180.00",
+          desc: "Switches mecánicos, retroiluminación RGB por tecla.",
+        },
+        {
+          img: "96.jpg",
+          nombre: "Audífonos Pro",
+          precio: "S/ 220.00",
+          desc: "Sonido envolvente 7.1, micrófono retráctil y RGB.",
+        },
+      ];
 
-      // 🧭 HEADER
-      function Header({ cartCount, toggleTheme }) {
-        return e(
-          "header",
-          { className: "bg-gray-800 bg-opacity-60 backdrop-blur-md shadow-md py-4 sticky top-0 z-50" },
-          e(
-            "div",
-            { className: "max-w-7xl mx-auto px-4 flex justify-between items-center" },
-            e(
-              "h1",
-              { className: "text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent" },
-              "🎮 NEXO"
-            ),
-            e(
-              "nav",
-              { className: "hidden md:flex space-x-6 font-semibold" },
-              [
-                ["Inicio", "index.html"],
-                ["Mouse", "mouse.html"],
-                ["Teclados", "teclados.html"],
-                ["Gráficas", "graficas.html"],
-                ["Audífonos", "audifonos.html"],
-                ["Juego", "juego.html"],
-                ["Contacto", "contacto.html"],
-              ].map(([name, link], i) =>
-                e(
-                  "a",
-                  {
-                    key: i,
-                    href: link,
-                    className: "hover:text-cyan-400 transition",
-                  },
-                  name
-                )
-              )
-            ),
-            e(
-              "div",
-              { className: "flex items-center gap-4" },
-              [
-                e(
-                  "button",
-                  {
-                    onClick: toggleTheme,
-                    className:
-                      "border border-cyan-400 text-cyan-400 px-3 py-1 rounded-lg hover:bg-cyan-400 hover:text-black transition",
-                  },
-                  "🌙"
-                ),
-                e(
-                  "div",
-                  { className: "relative" },
-                  [
-                    e("button", { className: "text-cyan-400 text-2xl" }, "🛒"),
-                    cartCount > 0 &&
-                      e(
-                        "span",
-                        {
-                          className:
-                            "absolute -top-2 -right-2 bg-purple-600 text-xs px-2 rounded-full",
-                        },
-                        cartCount
-                      ),
-                  ]
-                ),
-              ]
-            )
-          )
-        );
+      // === GENERAR CARDS ===
+      const contenedor = document.getElementById("productos");
+      productos.forEach((p) => {
+        const card = document.createElement("div");
+        card.className =
+          "bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition transform duration-300";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.nombre}" class="rounded-lg mb-4 mx-auto h-40 object-cover">
+          <h3 class="text-xl font-semibold mb-1">${p.nombre}</h3>
+          <p class="text-cyan-300 font-medium mb-2">${p.precio}</p>
+          <p class="text-sm text-gray-400 mb-3">${p.desc}</p>
+          <button class="bg-gradient-to-r from-cyan-400 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:scale-105 transition">🛒 Agregar</button>
+        `;
+        contenedor.appendChild(card);
+        anime({ targets: card, opacity: [0, 1], translateY: [30, 0], delay: 200, duration: 600 });
+      });
+
+      // === TEMA OSCURO/CLARO ===
+      const btn = document.getElementById("theme-btn");
+      let dark = true;
+      btn.onclick = () => {
+        dark = !dark;
+        document.body.className = dark
+          ? "bg-gray-900 text-white"
+          : "bg-white text-black";
+      };
+
+      // === CHATBOT ===
+      const toggle = document.getElementById("chat-toggle");
+      const windowChat = document.getElementById("chat-window");
+      const chatBody = document.getElementById("chat-body");
+      const form = document.getElementById("chat-form");
+      const input = document.getElementById("chat-input");
+
+      toggle.onclick = () => {
+        const visible = windowChat.style.display === "flex";
+        windowChat.style.display = visible ? "none" : "flex";
+      };
+
+      function addMessage(text, from = "bot") {
+        const msg = document.createElement("div");
+        msg.className = "msg " + (from === "user" ? "user" : "");
+        msg.textContent = text;
+        chatBody.appendChild(msg);
+        chatBody.scrollTop = chatBody.scrollHeight;
       }
 
-      // 💎 PRODUCT CARD
-      function ProductCard({ item, addToCart }) {
-        return e(
-          motion.div,
-          {
-            whileHover: { scale: 1.05 },
-            className:
-              "bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition",
-          },
-          [
-            e("img", {
-              src: item.img,
-              alt: item.nombre,
-              className: "rounded-lg mb-4 mx-auto h-40 object-cover",
-            }),
-            e("h3", { className: "text-xl font-semibold mb-1" }, item.nombre),
-            e("p", { className: "text-cyan-300 font-medium mb-2" }, item.precio),
-            e("p", { className: "text-sm text-gray-400 mb-3" }, item.desc),
-            e(
-              "button",
-              {
-                onClick: () => addToCart(item),
-                className:
-                  "bg-gradient-to-r from-cyan-400 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:scale-105 transition",
-              },
-              "🛒 Agregar"
-            ),
-          ]
-        );
-      }
+      addMessage("¡Hola gamer! 🎮 Soy NEXO-BOT, ¿en qué te ayudo?");
 
-      // 💬 CHATBOT
-      function Chatbot() {
-        const [open, setOpen] = React.useState(false);
-        const [messages, setMessages] = React.useState([
-          { from: "bot", text: "¡Hola gamer! 🎮 Soy NEXO-BOT, ¿qué necesitas?" },
-        ]);
-        const [input, setInput] = React.useState("");
+      form.onsubmit = (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
+        addMessage(text, "user");
+        input.value = "";
 
-        function sendMessage(e) {
-          e.preventDefault();
-          if (!input.trim()) return;
-
-          setMessages([...messages, { from: "user", text: input }]);
-          const lower = input.toLowerCase();
-          setInput("");
-
-          setTimeout(() => {
-            let reply = "😎 Estoy en desarrollo, pero pronto responderé más cosas.";
-            if (lower.includes("precio") || lower.includes("costo"))
-              reply = "💸 Tenemos productos desde S/120 hasta S/350.";
-            if (lower.includes("mouse"))
-              reply = "🖱 Podés ver nuestros mouses en la sección Mouse.";
-            if (lower.includes("teclado"))
-              reply = "⌨️ Revisá la sección Teclados para ver modelos RGB.";
-            if (lower.includes("audifono"))
-              reply = "🎧 Los audífonos gamer están espectaculares 🔥.";
-            setMessages((prev) => [...prev, { from: "bot", text: reply }]);
-          }, 600);
-        }
-
-        return e(
-          "div",
-          { className: "fixed bottom-6 right-6 z-50" },
-          open
-            ? e(
-                "div",
-                {
-                  className:
-                    "w-80 bg-gray-800 border border-cyan-500 rounded-2xl shadow-lg flex flex-col overflow-hidden",
-                },
-                [
-                  e(
-                    "div",
-                    {
-                      className:
-                        "bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-bold text-center py-2",
-                    },
-                    "🤖 NEXO BOT"
-                  ),
-                  e(
-                    "div",
-                    {
-                      className:
-                        "flex-1 overflow-y-auto p-3 space-y-2 text-sm max-h-80",
-                    },
-                    messages.map((msg, i) =>
-                      e(
-                        "div",
-                        {
-                          key: i,
-                          className: `p-2 rounded-lg ${
-                            msg.from === "bot"
-                              ? "bg-gray-700 text-left"
-                              : "bg-cyan-600 text-right ml-auto"
-                          }`,
-                        },
-                        msg.text
-                      )
-                    )
-                  ),
-                  e(
-                    "form",
-                    { onSubmit: sendMessage, className: "flex border-t border-gray-700" },
-                    [
-                      e("input", {
-                        value: input,
-                        onChange: (ev) => setInput(ev.target.value),
-                        className:
-                          "flex-1 p-2 bg-gray-700 text-white outline-none text-sm",
-                        placeholder: "Escribe tu mensaje...",
-                      }),
-                      e(
-                        "button",
-                        {
-                          type: "submit",
-                          className: "px-3 bg-cyan-500 text-black font-bold",
-                        },
-                        "➤"
-                      ),
-                    ]
-                  ),
-                  e(
-                    "button",
-                    {
-                      onClick: () => setOpen(false),
-                      className:
-                        "bg-red-500 hover:bg-red-600 text-white text-xs py-1",
-                    },
-                    "Cerrar"
-                  ),
-                ]
-              )
-            : e(
-                "button",
-                {
-                  onClick: () => setOpen(true),
-                  className:
-                    "bg-gradient-to-r from-cyan-400 to-purple-600 text-white text-2xl p-4 rounded-full shadow-lg hover:scale-110 transition",
-                },
-                "💬"
-              )
-        );
-      }
-
-      // 🧠 APP PRINCIPAL
-      function App() {
-        const [cart, setCart] = React.useState([]);
-        const [dark, setDark] = React.useState(true);
-
-        const toggleTheme = () => {
-          setDark(!dark);
-          document.body.className = dark
-            ? "bg-white text-black"
-            : "bg-gray-900 text-white";
-        };
-
-        const productos = [
-          {
-            img: "imagen3.jpg",
-            nombre: "Mouse RGB Pro",
-            precio: "S/ 120.00",
-            desc: "Sensor óptico 16.000 DPI, luces RGB y cable trenzado.",
-          },
-          {
-            img: "imagen11.jpg",
-            nombre: "Teclado Mecánico RGB",
-            precio: "S/ 180.00",
-            desc: "Switches mecánicos, retroiluminación RGB por tecla.",
-          },
-          {
-            img: "96.jpg",
-            nombre: "Audífonos Pro",
-            precio: "S/ 220.00",
-            desc: "Sonido envolvente 7.1, micrófono retráctil y RGB.",
-          },
-        ];
-
-        return e(
-          React.Fragment,
-          null,
-          e(Header, { cartCount: cart.length, toggleTheme }),
-          e(
-            motion.main,
-            {
-              initial: { opacity: 0, y: 20 },
-              animate: { opacity: 1, y: 0 },
-              transition: { duration: 0.6 },
-              className: "max-w-7xl mx-auto px-6 py-10 text-center",
-            },
-            [
-              e(
-                "h2",
-                { className: "text-4xl font-bold text-cyan-400 mb-8" },
-                "💎 Productos Destacados"
-              ),
-              e(
-                "div",
-                { className: "grid gap-8 sm:grid-cols-2 lg:grid-cols-3" },
-                productos.map((p, i) =>
-                  e(ProductCard, {
-                    key: i,
-                    item: p,
-                    addToCart: (item) => setCart([...cart, item]),
-                  })
-                )
-              ),
-            ]
-          ),
-          e(
-            "footer",
-            { className: "text-center py-6 text-gray-400 mt-10" },
-            "© 2025 NEXO. Todos los derechos reservados."
-          ),
-          e(Chatbot)
-        );
-      }
-
-      ReactDOM.createRoot(document.getElementById("root")).render(e(App));
+        setTimeout(() => {
+          let reply = "😎 Estoy en desarrollo, pero pronto responderé más cosas.";
+          const lower = text.toLowerCase();
+          if (lower.includes("precio") || lower.includes("costo"))
+            reply = "💸 Tenemos productos desde S/120 hasta S/350.";
+          if (lower.includes("mouse"))
+            reply = "🖱 Revisá la sección Mouse para ver nuestros modelos RGB.";
+          if (lower.includes("teclado"))
+            reply = "⌨️ Mirá la sección Teclados Gamer 🔥.";
+          if (lower.includes("audifono"))
+            reply = "🎧 Tenemos audífonos con sonido 7.1 y luces RGB.";
+          addMessage(reply);
+        }, 700);
+      };
     </script>
   </body>
 </html>
+
