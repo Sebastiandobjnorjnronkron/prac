@@ -5,97 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tarjetas Gráficas - NEXO</title>
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- React + Babel -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- Framer Motion -->
-    <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
   </head>
 
   <body class="bg-gray-900 text-white font-[Poppins]">
-    <div id="root"></div>
+    <!-- HEADER -->
+    <header class="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+          🎮 NEXO
+        </h1>
+        <nav class="hidden md:flex space-x-5 text-sm sm:text-base">
+          <a href="index.html" class="hover:text-cyan-400">Inicio</a>
+          <a href="mouse.html" class="hover:text-cyan-400">Mouse</a>
+          <a href="teclados.html" class="hover:text-cyan-400">Teclados</a>
+          <a href="graficas.html" class="text-cyan-400 font-semibold">Gráficas</a>
+          <a href="audifonos.html" class="hover:text-cyan-400">Audífonos</a>
+          <a href="juego.html" class="hover:text-cyan-400">Juego</a>
+          <a href="contacto.html" class="hover:text-cyan-400">Contacto</a>
+        </nav>
+      </div>
+    </header>
 
-    <script type="text/babel">
-      const { motion } = window["framerMotion"];
+    <!-- CONTENIDO -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+      <h2 class="text-3xl font-bold text-center mb-10 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+        💠 Tarjetas Gráficas Gamer
+      </h2>
 
-      // ==== HEADER ====
-      const Header = () => (
-        <header className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4 sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
-              🎮 NEXO
-            </h1>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition">
+          <img src="imagen72.jpg" alt="GTX 1660 Super" class="rounded-lg mb-4 mx-auto h-48 object-cover" />
+          <h3 class="text-xl font-semibold mb-1">GTX 1660 Super</h3>
+          <p class="text-cyan-300 font-medium mb-2">S/ 950.00</p>
+          <p class="text-sm text-gray-400 mb-3">6GB GDDR6, dual fan, excelente rendimiento en 1080p.</p>
+        </div>
 
-            <nav className="hidden md:flex space-x-5 text-sm sm:text-base">
-              <a href="index.html" className="hover:text-cyan-400">Inicio</a>
-              <a href="mouse.html" className="hover:text-cyan-400">Mouse</a>
-              <a href="teclados.html" className="hover:text-cyan-400">Teclados</a>
-              <a href="graficas.html" className="text-cyan-400 font-semibold">Gráficas</a>
-              <a href="audifonos.html" className="hover:text-cyan-400">Audífonos</a>
-              <a href="juego.html" className="hover:text-cyan-400">Juego</a>
-              <a href="contacto.html" className="hover:text-cyan-400">Contacto</a>
-            </nav>
-          </div>
-        </header>
-      );
+        <div class="bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition">
+          <img src="imagen74.jpg" alt="RTX 4070 Super" class="rounded-lg mb-4 mx-auto h-48 object-cover" />
+          <h3 class="text-xl font-semibold mb-1">RTX 4070 Super</h3>
+          <p class="text-cyan-300 font-medium mb-2">S/ 3,200.00</p>
+          <p class="text-sm text-gray-400 mb-3">12GB GDDR6X, gran rendimiento en 1440p/4K y Ray Tracing.</p>
+        </div>
 
-      // ==== PRODUCTO ====
-      const ProductCard = ({ item }) => (
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition"
-        >
-          <img src={item.img} alt={item.nombre} className="rounded-lg mb-4 mx-auto h-48 object-cover" />
-          <h3 className="text-xl font-semibold mb-1">{item.nombre}</h3>
-          <p className="text-cyan-300 font-medium mb-2">{item.precio}</p>
-          <p className="text-sm text-gray-400 mb-3">{item.desc}</p>
-          <button
-            onClick={() => alert("🛒 Compra próximamente disponible en NEXO Store.")}
-            className="bg-gradient-to-r from-cyan-400 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:scale-105 transition"
-          >
-            Comprar
-          </button>
-        </motion.div>
-      );
+        <div class="bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition">
+          <img src="imagen76.webp" alt="RTX 3080" class="rounded-lg mb-4 mx-auto h-48 object-cover" />
+          <h3 class="text-xl font-semibold mb-1">RTX 3080</h3>
+          <p class="text-cyan-300 font-medium mb-2">S/ 2,750.00</p>
+          <p class="text-sm text-gray-400 mb-3">10GB GDDR6X, ideal para gaming 4K y streaming.</p>
+        </div>
+      </div>
+    </main>
 
-      // ==== APP ====
-      const App = () => {
-        const productos = [
-          { img: "imagen72.jpg", nombre: "GTX 1660 Super", precio: "S/ 950.00", desc: "6GB GDDR6, dual fan, excelente rendimiento en 1080p." },
-          { img: "imagen74.jpg", nombre: "RTX 4070 Super", precio: "S/ 3,200.00", desc: "12GB GDDR6X, gran rendimiento en 1440p/4K y Ray Tracing." },
-          { img: "imagen76.webp", nombre: "RTX 3080", precio: "S/ 2,750.00", desc: "10GB GDDR6X, ideal para gaming 4K y streaming." },
-          { img: "imagen75.jpg", nombre: "RX 6700 XT", precio: "S/ 1,950.00", desc: "12GB GDDR6, rendimiento sólido en 1440p." },
-          { img: "imagen73.jpg", nombre: "RTX 3060 Ti", precio: "S/ 1,850.00", desc: "8GB GDDR6, soporte DLSS y Ray Tracing, ideal para 1440p." },
-          { img: "imagen72.jpg", nombre: "RTX 4090", precio: "S/ 6,500.00", desc: "24GB GDDR6X, máximo rendimiento para 4K/8K e IA." },
-        ];
-
-        return (
-          <div>
-            <Header />
-            <main className="max-w-7xl mx-auto px-6 py-10">
-              <h2 className="text-3xl font-bold text-center mb-10 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
-                💠 Tarjetas Gráficas Gamer
-              </h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {productos.map((p, i) => (
-                  <ProductCard key={i} item={p} />
-                ))}
-              </div>
-            </main>
-            <footer className="text-center text-gray-400 py-6 border-t border-gray-700 mt-10">
-              © 2025 NEXO. Todos los derechos reservados.
-            </footer>
-          </div>
-        );
-      };
-
-      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-    </script>
+    <footer class="text-center text-gray-400 py-6 border-t border-gray-700 mt-10">
+      © 2025 NEXO. Todos los derechos reservados.
+    </footer>
   </body>
 </html>
+
 
