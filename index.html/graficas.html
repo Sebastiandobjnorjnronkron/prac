@@ -23,71 +23,34 @@
     <script type="text/babel">
       const { motion } = window["framerMotion"];
 
-      // ==== COMPONENTE HEADER ====
-      const Header = () => {
-        // useEffect para inicializar el menú móvil
-        React.useEffect(() => {
-          const toggle = document.getElementById("menu-toggle");
-          const menu = document.getElementById("menu");
-          if (toggle && menu) {
-            toggle.addEventListener("click", () => {
-              menu.classList.toggle("hidden");
-            });
-          }
-        }, []);
+      // ==== HEADER ====
+      const Header = () => (
+        <header className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4 sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+              🎮 NEXO
+            </h1>
 
-        return (
-          <header className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4 sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
-                🎮 NEXO
-              </h1>
-
-              <nav className="hidden md:flex space-x-5 text-sm sm:text-base">
-                <a href="index.html" className="hover:text-cyan-400">Inicio</a>
-                <a href="mouse.html" className="hover:text-cyan-400">Mouse</a>
-                <a href="teclados.html" className="hover:text-cyan-400">Teclados</a>
-                <a href="graficas.html" className="text-cyan-400 font-semibold">Gráficas</a>
-                <a href="audifonos.html" className="hover:text-cyan-400">Audífonos</a>
-                <a href="juego.html" className="hover:text-cyan-400">Juego</a>
-                <a href="contacto.html" className="hover:text-cyan-400">Contacto</a>
-              </nav>
-
-              <button
-                id="menu-toggle"
-                className="md:hidden border border-cyan-400 text-cyan-400 px-3 py-1 rounded-lg text-lg"
-              >
-                ☰
-              </button>
-            </div>
-
-            <nav
-              id="menu"
-              className="hidden flex-col text-center bg-gray-800 py-3 space-y-3 md:hidden"
-            >
-              <a href="index.html" className="hover:text-cyan-400 block">Inicio</a>
-              <a href="mouse.html" className="hover:text-cyan-400 block">Mouse</a>
-              <a href="teclados.html" className="hover:text-cyan-400 block">Teclados</a>
-              <a href="graficas.html" className="text-cyan-400 font-semibold block">Gráficas</a>
-              <a href="audifonos.html" className="hover:text-cyan-400 block">Audífonos</a>
-              <a href="juego.html" className="hover:text-cyan-400 block">Juego</a>
-              <a href="contacto.html" className="hover:text-cyan-400 block">Contacto</a>
+            <nav className="hidden md:flex space-x-5 text-sm sm:text-base">
+              <a href="index.html" className="hover:text-cyan-400">Inicio</a>
+              <a href="mouse.html" className="hover:text-cyan-400">Mouse</a>
+              <a href="teclados.html" className="hover:text-cyan-400">Teclados</a>
+              <a href="graficas.html" className="text-cyan-400 font-semibold">Gráficas</a>
+              <a href="audifonos.html" className="hover:text-cyan-400">Audífonos</a>
+              <a href="juego.html" className="hover:text-cyan-400">Juego</a>
+              <a href="contacto.html" className="hover:text-cyan-400">Contacto</a>
             </nav>
-          </header>
-        );
-      };
+          </div>
+        </header>
+      );
 
       // ==== PRODUCTO ====
       const ProductCard = ({ item }) => (
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition duration-300"
+          className="bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition"
         >
-          <img
-            src={item.img}
-            alt={item.nombre}
-            className="rounded-lg mb-4 mx-auto h-48 w-full object-cover"
-          />
+          <img src={item.img} alt={item.nombre} className="rounded-lg mb-4 mx-auto h-48 object-cover" />
           <h3 className="text-xl font-semibold mb-1">{item.nombre}</h3>
           <p className="text-cyan-300 font-medium mb-2">{item.precio}</p>
           <p className="text-sm text-gray-400 mb-3">{item.desc}</p>
@@ -103,42 +66,12 @@
       // ==== APP ====
       const App = () => {
         const productos = [
-          {
-            img: "imagen72.jpg",
-            nombre: "GTX 1660 Super",
-            precio: "S/ 950.00",
-            desc: "6GB GDDR6, dual fan, excelente rendimiento en 1080p.",
-          },
-          {
-            img: "imagen74.jpg",
-            nombre: "RTX 4070 Super",
-            precio: "S/ 3,200.00",
-            desc: "12GB GDDR6X, gran rendimiento en 1440p/4K y trazado de rayos.",
-          },
-          {
-            img: "imagen76.webp",
-            nombre: "RTX 3080",
-            precio: "S/ 2,750.00",
-            desc: "10GB GDDR6X, ideal para gaming 4K y streaming.",
-          },
-          {
-            img: "imagen75.jpg",
-            nombre: "RX 6700 XT",
-            precio: "S/ 1,950.00",
-            desc: "12GB GDDR6, rendimiento sólido en 1440p y gran eficiencia.",
-          },
-          {
-            img: "imagen73.jpg",
-            nombre: "RTX 3060 Ti",
-            precio: "S/ 1,850.00",
-            desc: "8GB GDDR6, soporte Ray Tracing y DLSS, ideal para 1440p.",
-          },
-          {
-            img: "imagen72.jpg",
-            nombre: "RTX 4090",
-            precio: "S/ 6,500.00",
-            desc: "24GB GDDR6X, máximo rendimiento para 4K/8K e IA.",
-          },
+          { img: "imagen72.jpg", nombre: "GTX 1660 Super", precio: "S/ 950.00", desc: "6GB GDDR6, dual fan, excelente rendimiento en 1080p." },
+          { img: "imagen74.jpg", nombre: "RTX 4070 Super", precio: "S/ 3,200.00", desc: "12GB GDDR6X, gran rendimiento en 1440p/4K y Ray Tracing." },
+          { img: "imagen76.webp", nombre: "RTX 3080", precio: "S/ 2,750.00", desc: "10GB GDDR6X, ideal para gaming 4K y streaming." },
+          { img: "imagen75.jpg", nombre: "RX 6700 XT", precio: "S/ 1,950.00", desc: "12GB GDDR6, rendimiento sólido en 1440p." },
+          { img: "imagen73.jpg", nombre: "RTX 3060 Ti", precio: "S/ 1,850.00", desc: "8GB GDDR6, soporte DLSS y Ray Tracing, ideal para 1440p." },
+          { img: "imagen72.jpg", nombre: "RTX 4090", precio: "S/ 6,500.00", desc: "24GB GDDR6X, máximo rendimiento para 4K/8K e IA." },
         ];
 
         return (
@@ -154,7 +87,7 @@
                 ))}
               </div>
             </main>
-            <footer className="text-center text-gray-400 py-6 bg-gray-800 bg-opacity-50 mt-10">
+            <footer className="text-center text-gray-400 py-6 border-t border-gray-700 mt-10">
               © 2025 NEXO. Todos los derechos reservados.
             </footer>
           </div>
@@ -165,8 +98,4 @@
     </script>
   </body>
 </html>
-
-
-
-
 
