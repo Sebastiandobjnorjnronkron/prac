@@ -4,50 +4,101 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contacto - NEXO</title>
-    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body>
-    <header>
-      <div class="contenedor-header">
-        <h1 class="logo"><span class="mando">🎮</span> NEXO</h1>
 
-        <!-- Botón hamburguesa -->
-        <button class="menu-toggle" aria-label="Abrir menú">☰</button>
-
-        <nav class="menu">
-          <a href="index.html">Inicio</a>
-          <a href="mouse.html">Mouse</a>
-          <a href="teclados.html">Teclados</a>
-          <a href="graficas.html">Tarjetas Gráficas</a>
-          <a href="audifonos.html">Audífonos</a>
-          <a href="juego.html">Juego</a>
-          <a href="contacto.html">Contacto</a>
+  <body class="bg-gray-900 text-white font-[Poppins]">
+    <header class="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+        <h1
+          class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"
+        >
+          🎮 NEXO
+        </h1>
+        <nav
+          class="hidden md:flex flex-wrap justify-center gap-4 text-sm font-semibold"
+        >
+          <a href="index.html" class="hover:text-cyan-400">Inicio</a>
+          <a href="mouse.html" class="hover:text-cyan-400">Mouse</a>
+          <a href="teclados.html" class="hover:text-cyan-400">Teclados</a>
+          <a href="graficas.html" class="hover:text-cyan-400">Gráficas</a>
+          <a href="audifonos.html" class="hover:text-cyan-400">Audífonos</a>
+          <a href="juego.html" class="hover:text-cyan-400">Juego</a>
+          <a href="contacto.html" class="text-cyan-400 font-bold">Contacto</a>
         </nav>
       </div>
     </header>
 
-    <main>
-      <h2>Contáctanos</h2>
-      <div class="contact-layout">
-        <div class="contact-form">
-          <form>
-            <input type="text" placeholder="Tu nombre" required />
-            <input type="email" placeholder="Tu correo" required />
-            <textarea rows="5" placeholder="Tu mensaje"></textarea>
-            <button type="submit">Enviar mensaje</button>
-          </form>
-        </div>
-        <div class="contact-map">
-          <iframe
-            src="https://www.google.com/maps?q=San+Isidro,+Lima,+Peru&output=embed"
-            allowfullscreen
-            loading="lazy"
-          ></iframe>
-        </div>
-      </div>
-    </main>
+    <main id="root" class="max-w-7xl mx-auto px-4 py-10"></main>
 
-    <footer>© 2025 NEXO. Todos los derechos reservados.</footer>
-    <script src="script.js"></script>
+    <footer
+      class="text-center text-gray-400 text-sm py-6 bg-gray-800 bg-opacity-50 mt-10"
+    >
+      © 2025 NEXO. Todos los derechos reservados.
+    </footer>
+
+    <script type="text/babel">
+      function Contacto() {
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          alert("📩 Tu mensaje fue enviado correctamente (simulado).");
+          e.target.reset();
+        };
+
+        return (
+          <div className="grid md:grid-cols-2 gap-8">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-gray-800 p-6 rounded-xl shadow-lg"
+            >
+              <h2 className="text-2xl font-bold mb-4 text-cyan-400">
+                Contáctanos
+              </h2>
+              <input
+                type="text"
+                placeholder="Tu nombre"
+                className="w-full mb-3 p-2 rounded-md bg-gray-700 text-white"
+                required
+              />
+              <input
+                type="email"
+                placeholder="Tu correo"
+                className="w-full mb-3 p-2 rounded-md bg-gray-700 text-white"
+                required
+              />
+              <textarea
+                placeholder="Tu mensaje"
+                rows="5"
+                className="w-full mb-3 p-2 rounded-md bg-gray-700 text-white"
+              ></textarea>
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-cyan-400 to-purple-600 px-4 py-2 rounded-md font-semibold hover:scale-105 transition"
+              >
+                Enviar mensaje
+              </button>
+            </form>
+
+            <iframe
+              src="https://www.google.com/maps?q=San+Isidro,+Lima,+Peru&output=embed"
+              className="w-full h-96 rounded-xl shadow-lg"
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<Contacto />, document.getElementById("root"));
+    </script>
   </body>
 </html>
