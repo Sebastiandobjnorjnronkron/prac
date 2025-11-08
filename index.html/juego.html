@@ -4,137 +4,129 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Juego - NEXO</title>
-    <link rel="stylesheet" href="style.css" />
-    <style>
-      .game-container {
-        position: relative;
-        width: 90%;
-        max-width: 700px;
-        height: 420px;
-        margin: 40px auto;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 15px;
-        overflow: hidden;
-        cursor: crosshair;
-        box-shadow: 0 0 25px rgba(90, 0, 255, 0.3);
-      }
-      .target {
-        position: absolute;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        background: radial-gradient(circle, #5a00ff, #00bfff);
-        box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
-        cursor: pointer;
-        transition: transform 0.1s;
-      }
-      .hud {
-        text-align: center;
-        margin-top: 15px;
-      }
-      .hud span {
-        font-weight: bold;
-        color: var(--accent-2);
-        margin: 0 10px;
-      }
-      #startGame {
-        background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
-        border: none;
-        padding: 10px 18px;
-        border-radius: 8px;
-        color: #fff;
-        cursor: pointer;
-        font-weight: 600;
-      }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body>
-    <header>
-      <div class="contenedor-header">
-        <h1 class="logo"><span class="mando">🎮</span> NEXO</h1>
 
-        <!-- Botón hamburguesa -->
-        <button class="menu-toggle" aria-label="Abrir menú">☰</button>
-
-        <nav class="menu">
-          <a href="index.html">Inicio</a>
-          <a href="mouse.html">Mouse</a>
-          <a href="teclados.html">Teclados</a>
-          <a href="graficas.html">Tarjetas Gráficas</a>
-          <a href="audifonos.html">Audífonos</a>
-          <a href="juego.html">Juego</a>
-          <a href="contacto.html">Contacto</a>
+  <body class="bg-gray-900 text-white font-[Poppins]">
+    <header class="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+        <h1
+          class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"
+        >
+          🎮 NEXO
+        </h1>
+        <nav
+          class="hidden md:flex flex-wrap justify-center gap-4 text-sm font-semibold"
+        >
+          <a href="index.html" class="hover:text-cyan-400">Inicio</a>
+          <a href="mouse.html" class="hover:text-cyan-400">Mouse</a>
+          <a href="teclados.html" class="hover:text-cyan-400">Teclados</a>
+          <a href="graficas.html" class="hover:text-cyan-400">Gráficas</a>
+          <a href="audifonos.html" class="hover:text-cyan-400">Audífonos</a>
+          <a href="juego.html" class="text-cyan-400 font-bold">Juego</a>
+          <a href="contacto.html" class="hover:text-cyan-400">Contacto</a>
         </nav>
       </div>
     </header>
 
-    <main>
-      <h2>🎯 Juego NEXO — Caza los objetivos</h2>
-      <p style="text-align: center; color: var(--text-muted)">
-        Haz clic en los círculos brillantes antes de que desaparezcan.
-        ¡Demuestra tus reflejos gamer!
-      </p>
+    <main id="root" class="max-w-4xl mx-auto px-4 py-10 text-center"></main>
 
-      <div class="game-container" id="gameContainer"></div>
+    <footer
+      class="text-center text-gray-400 text-sm py-6 bg-gray-800 bg-opacity-50 mt-10"
+    >
+      © 2025 NEXO. Todos los derechos reservados.
+    </footer>
 
-      <div class="hud">
-        <span>Puntuación: <strong id="score">0</strong></span>
-        <span>Tiempo: <strong id="time">30</strong>s</span>
-        <button id="startGame">Iniciar</button>
-      </div>
-    </main>
+    <script type="text/babel">
+      function Game() {
+        const [score, setScore] = React.useState(0);
+        const [time, setTime] = React.useState(30);
+        const [playing, setPlaying] = React.useState(false);
+        const gameRef = React.useRef();
 
-    <footer>© 2025 NEXO. Todos los derechos reservados.</footer>
+        React.useEffect(() => {
+          let timer, spawner;
+          if (playing) {
+            timer = setInterval(() => {
+              setTime((t) => {
+                if (t <= 1) {
+                  clearInterval(spawner);
+                  clearInterval(timer);
+                  setPlaying(false);
+                  alert("🎯 Juego terminado. Puntuación: " + score);
+                  return 30;
+                }
+                return t - 1;
+              });
+            }, 1000);
 
-    <script>
-      const gameContainer = document.getElementById("gameContainer");
-      const scoreEl = document.getElementById("score");
-      const timeEl = document.getElementById("time");
-      const startBtn = document.getElementById("startGame");
-      let score = 0,
-        time = 30,
-        playing = false,
-        timer,
-        spawn;
+            spawner = setInterval(() => {
+              if (!gameRef.current) return;
+              const target = document.createElement("div");
+              target.className =
+                "absolute w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-cyan-400 shadow-lg cursor-pointer animate-pulse";
+              const x = Math.random() * (gameRef.current.clientWidth - 50);
+              const y = Math.random() * (gameRef.current.clientHeight - 50);
+              target.style.left = x + "px";
+              target.style.top = y + "px";
+              target.onclick = () => {
+                setScore((s) => s + 1);
+                target.remove();
+              };
+              gameRef.current.appendChild(target);
+              setTimeout(() => target.remove(), 1200);
+            }, 600);
+          }
+          return () => {
+            clearInterval(timer);
+            clearInterval(spawner);
+          };
+        }, [playing]);
 
-      function spawnTarget() {
-        const target = document.createElement("div");
-        target.classList.add("target");
-        const x = Math.random() * (gameContainer.clientWidth - 50);
-        const y = Math.random() * (gameContainer.clientHeight - 50);
-        target.style.left = x + "px";
-        target.style.top = y + "px";
-        gameContainer.appendChild(target);
-
-        target.addEventListener("click", () => {
-          score++;
-          scoreEl.textContent = score;
-          target.remove();
-        });
-
-        setTimeout(() => target.remove(), 1000 + Math.random() * 500);
+        return (
+          <div>
+            <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+              🎯 Juego NEXO — Caza los objetivos
+            </h2>
+            <p className="text-gray-400 mb-4">
+              Haz clic en los círculos brillantes antes de que desaparezcan.
+            </p>
+            <div
+              ref={gameRef}
+              className="relative mx-auto w-full max-w-[700px] h-[400px] bg-gray-800 rounded-xl overflow-hidden shadow-cyan-500/30 shadow-lg mb-4"
+            ></div>
+            <div className="flex justify-center items-center gap-6 text-lg">
+              <span>
+                <strong>Puntuación:</strong> {score}
+              </span>
+              <span>
+                <strong>Tiempo:</strong> {time}s
+              </span>
+              <button
+                onClick={() => {
+                  setScore(0);
+                  setTime(30);
+                  setPlaying(true);
+                }}
+                className="bg-gradient-to-r from-cyan-400 to-purple-600 px-4 py-2 rounded-md text-white font-semibold hover:scale-105 transition"
+              >
+                Iniciar
+              </button>
+            </div>
+          </div>
+        );
       }
 
-      startBtn.addEventListener("click", () => {
-        if (playing) return;
-        playing = true;
-        score = 0;
-        time = 30;
-        scoreEl.textContent = score;
-        timeEl.textContent = time;
-        gameContainer.innerHTML = "";
-        spawn = setInterval(spawnTarget, 600);
-        timer = setInterval(() => {
-          time--;
-          timeEl.textContent = time;
-          if (time <= 0) {
-            clearInterval(spawn);
-            clearInterval(timer);
-            playing = false;
-            alert("🎮 Juego terminado. Puntuación: " + score);
-          }
-        }, 1000);
-      });
+      ReactDOM.render(<Game />, document.getElementById("root"));
     </script>
   </body>
 </html>
