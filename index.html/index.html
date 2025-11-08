@@ -109,4 +109,78 @@
       // COMPONENTE TOP VENTAS
       const TopSales = () => (
         <motion.section
-          className="max-w-7xl mx-auto px-6 py-10 mt-10 bg-g
+          className="max-w-7xl mx-auto px-6 py-10 mt-10 bg-gray-800 bg-opacity-40 rounded-2xl"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <h2 className="text-3xl font-bold text-center mb-8 text-cyan-400">
+            🔥 Productos más vendidos
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                nombre: "Mouse RGB Pro",
+                precio: "S/ 120.00",
+                img: "imagen2.jpg",
+                desc: "Sensor 16,000 DPI y cable trenzado.",
+              },
+              {
+                nombre: "Teclado Mecánico RGB",
+                precio: "S/ 180.00",
+                img: "imagen5.jpg",
+                desc: "Switches mecánicos y luces RGB dinámicas.",
+              },
+              {
+                nombre: "Audífonos Galaxy",
+                precio: "S/ 260.00",
+                img: "95.webp",
+                desc: "Audio envolvente con iluminación RGB.",
+              },
+            ].map((item, i) => (
+              <ProductCard key={i} item={item} addToCart={() => {}} />
+            ))}
+          </div>
+        </motion.section>
+      );
+
+      // APP PRINCIPAL
+      const App = () => {
+        const [cart, setCart] = React.useState([]);
+        const [darkMode, setDarkMode] = React.useState(true);
+
+        const toggleTheme = () => {
+          setDarkMode(!darkMode);
+          document.body.className = darkMode
+            ? "bg-white text-black font-[Poppins]"
+            : "bg-gray-900 text-white font-[Poppins]";
+        };
+
+        const addToCart = (item) => setCart([...cart, item]);
+
+        return (
+          <>
+            <Header
+              cartCount={cart.length}
+              toggleTheme={toggleTheme}
+            />
+            <motion.main
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              <TopSales addToCart={addToCart} />
+              <footer className="text-center py-6 text-gray-400 mt-10">
+                © 2025 NEXO. Todos los derechos reservados.
+              </footer>
+            </motion.main>
+          </>
+        );
+      };
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
+
+
