@@ -232,6 +232,29 @@
         border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
 
+      /* === BOTÓN WHATSAPP === */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: linear-gradient(90deg, #25D366, #128C7E);
+        color: white;
+        font-size: 28px;
+        text-align: center;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        z-index: 999;
+        text-decoration: none;
+      }
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 25px rgba(37, 211, 102, 0.9);
+      }
+
       /* === RESPONSIVE === */
       @media (max-width: 768px) {
         .hero {
@@ -312,12 +335,24 @@
       </div>
     </main>
 
-    <footer>© 2025 NEXO. Más de <span id="contador">5000</span> gamers confían en nosotros 💪</footer>
+    <footer>
+      © 2025 NEXO. Más de <span id="contador">5000</span> gamers confían en nosotros 💪
+    </footer>
 
     <div class="popup" id="popup">
       🔥 Gamer, este mes los <strong>teclados</strong> tienen 20 % de descuento.
       <button onclick="window.location='teclados.html'">Ver</button>
     </div>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP PERSONALIZADO -->
+    <a
+      href="https://wa.me/51965304331?text=Hola%20NEXO%2C%20quiero%20mejorar%20mi%20setup%20gamer%20🔥"
+      class="whatsapp-float"
+      target="_blank"
+      title="Chatea con NEXO por WhatsApp"
+    >
+      💬
+    </a>
 
     <script>
       // === POP-UP APARICIÓN AUTOMÁTICA ===
