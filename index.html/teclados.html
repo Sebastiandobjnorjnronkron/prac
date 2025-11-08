@@ -1,105 +1,138 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teclados - NEXO</title>
-    <link rel="stylesheet" href="style.css" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React + Babel -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body>
-    <header>
-      <div class="contenedor-header">
-        <h1 class="logo"><span class="mando">🎮</span> NEXO</h1>
 
-        <!-- Botón hamburguesa -->
-        <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+  <body class="bg-gray-900 text-white font-[Poppins]">
+    <header class="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4">
+      <div
+        class="max-w-7xl mx-auto px-4 flex justify-between items-center flex-wrap"
+      >
+        <h1
+          class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"
+        >
+          🎮 NEXO
+        </h1>
 
-        <nav class="menu">
-          <a href="index.html">Inicio</a>
-          <a href="mouse.html">Mouse</a>
-          <a href="teclados.html">Teclados</a>
-          <a href="graficas.html">Tarjetas Gráficas</a>
-          <a href="audifonos.html">Audífonos</a>
-          <a href="juego.html">Juego</a>
-          <a href="contacto.html">Contacto</a>
+        <button
+          class="menu-toggle border-2 border-cyan-400 text-cyan-400 rounded-lg px-3 py-1 text-lg md:hidden"
+        >
+          ☰
+        </button>
+
+        <nav
+          class="menu hidden md:flex flex-wrap justify-center gap-4 text-sm font-semibold"
+        >
+          <a href="index.html" class="hover:text-cyan-400">Inicio</a>
+          <a href="mouse.html" class="hover:text-cyan-400">Mouse</a>
+          <a href="teclados.html" class="text-cyan-400 font-bold">Teclados</a>
+          <a href="graficas.html" class="hover:text-cyan-400">Gráficas</a>
+          <a href="audifonos.html" class="hover:text-cyan-400">Audífonos</a>
+          <a href="juego.html" class="hover:text-cyan-400">Juego</a>
+          <a href="contacto.html" class="hover:text-cyan-400">Contacto</a>
         </nav>
       </div>
     </header>
 
-    <main>
-      <h2>⌨️ Teclados Gamer</h2>
-      <div class="grid-productos">
-        <div class="card">
-          <img src="imagen5.jpg" alt="Teclado Mecánico RGB" />
-          <h3>Teclado Mecánico RGB</h3>
-          <p class="precio">S/ 180.00</p>
-          <p class="desc">
-            Switches mecánicos táctiles (Outemu/Cherry opcional), iluminación
-            RGB por tecla, anti-ghosting 104 teclas, reposamuñecas extraíble, K
-            rollover completo.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
+    <main id="root" class="max-w-7xl mx-auto px-4 py-10"></main>
 
-        <div class="card">
-          <img src="imagen1.jpg" alt="Teclado Compacto 60%" />
-          <h3>Teclado Compacto 60%</h3>
-          <p class="precio">S/ 220.00</p>
-          <p class="desc">
-            Formato 60% (sin pad numérico), keycaps PBT, cable USB-C
-            desmontable, retroiluminación RGB y teclas programables vía
-            firmware.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
+    <footer
+      class="text-center text-gray-400 text-sm py-6 bg-gray-800 bg-opacity-50 mt-10"
+    >
+      © 2025 NEXO. Todos los derechos reservados.
+    </footer>
 
-        <div class="card">
-          <img src="imagen11.jpg" alt="Teclado Híbrido" />
-          <h3>Teclado Híbrido</h3>
-          <p class="precio">S/ 140.00</p>
-          <p class="desc">
-            Membrana reforzada con sensación táctil, retroiluminación RGB,
-            diseño resistente a salpicaduras y reposamuñecas incluido.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
+    <script type="text/babel">
+      const productos = [
+        {
+          nombre: "Teclado Mecánico RGB",
+          precio: "S/ 180.00",
+          img: "imagen5.jpg",
+          desc: "Switches mecánicos, iluminación RGB por tecla y anti-ghosting.",
+        },
+        {
+          nombre: "Teclado Compacto 60%",
+          precio: "S/ 220.00",
+          img: "imagen1.jpg",
+          desc: "Formato 60%, cable USB-C desmontable y keycaps PBT.",
+        },
+        {
+          nombre: "Teclado Híbrido",
+          precio: "S/ 140.00",
+          img: "imagen11.jpg",
+          desc: "Membrana reforzada, RGB y reposamuñecas incluido.",
+        },
+        {
+          nombre: "Teclado Low Profile",
+          precio: "S/ 250.00",
+          img: "imagen12.jpg",
+          desc: "Switches de perfil bajo y chasis de aluminio ultradelgado.",
+        },
+        {
+          nombre: "Teclado Inalámbrico RGB",
+          precio: "S/ 300.00",
+          img: "45.jpg",
+          desc: "Bluetooth 5.0, batería 40h y retroiluminación RGB.",
+        },
+        {
+          nombre: "Teclado Pro Gamer",
+          precio: "S/ 350.00",
+          img: "44.jpg",
+          desc: "Switches ópticos, macros instantáneos y polling 8000Hz.",
+        },
+      ];
 
-        <div class="card">
-          <img src="imagen12.jpg" alt="Teclado Low Profile" />
-          <h3>Teclado Low Profile</h3>
-          <p class="precio">S/ 250.00</p>
-          <p class="desc">
-            Switches de perfil bajo para respuestas rápidas, chasis de aluminio,
-            teclas silenciosas y diseño ultra delgado.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
+      function Producto({ nombre, precio, img, desc }) {
+        return (
+          <div className="bg-gray-800 rounded-xl p-4 shadow-md hover:shadow-cyan-500/30 hover:-translate-y-1 transition">
+            <img
+              src={img}
+              alt={nombre}
+              className="rounded-lg w-full mb-3 h-48 object-cover"
+            />
+            <h3 className="text-lg font-semibold">{nombre}</h3>
+            <p className="text-cyan-400 font-bold mb-1">{precio}</p>
+            <p className="text-gray-300 text-sm mb-3">{desc}</p>
+            <button className="bg-gradient-to-r from-cyan-400 to-purple-600 px-4 py-2 rounded-md text-white font-semibold hover:scale-105 transition">
+              Comprar
+            </button>
+          </div>
+        );
+      }
 
-        <div class="card">
-          <img src="45.jpg" alt="Teclado Inalámbrico RGB" />
-          <h3>Teclado Inalámbrico RGB</h3>
-          <p class="precio">S/ 300.00</p>
-          <p class="desc">
-            Conectividad Bluetooth 5.0, batería recargable 40h, multiplex
-            multi-dispositivo, retroiluminación RGB y perfil portable.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
+      function App() {
+        return (
+          <div>
+            <h2 className="text-3xl font-bold text-center mb-10 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+              ⌨️ Teclados Gamer
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {productos.map((p) => (
+                <Producto key={p.nombre} {...p} />
+              ))}
+            </div>
+          </div>
+        );
+      }
 
-        <div class="card">
-          <img src="44.jpg" alt="Teclado Pro Gamer" />
-          <h3>Teclado Pro Gamer</h3>
-          <p class="precio">S/ 350.00</p>
-          <p class="desc">
-            Switches ópticos lineales, polling 8000Hz, macros instantáneos,
-            memoria para perfiles y construcción profesional para torneos.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
-      </div>
-    </main>
-
-    <footer>© 2025 NEXO. Todos los derechos reservados.</footer>
-    <script src="script.js"></script>
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
   </body>
 </html>
