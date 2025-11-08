@@ -9,8 +9,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- ⚛️ REACT + BABEL -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
 
@@ -18,6 +24,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
+      // ✅ Componente principal (React)
       function Audifonos() {
         const productos = [
           {
@@ -29,52 +36,4 @@
           {
             nombre: "Audífonos Inalámbricos Ultra",
             precio: "S/ 350.00",
-            desc: "Bluetooth 5.2, cancelación activa de ruido, batería hasta 25h y carga rápida.",
-            img: "93.webp",
-          },
-          {
-            nombre: "Audífonos Esports",
-            precio: "S/ 160.00",
-            desc: "Diseño ligero, micrófono con cancelación de ruido, ideal para torneos y streaming.",
-            img: "96.jpg",
-          },
-        ];
-
-        return (
-          <section className="min-h-screen py-10 px-6">
-            <h1 className="text-4xl font-bold text-center text-blue-400 mb-10">
-              🎧 Audífonos Gamer
-            </h1>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {productos.map((p, i) => (
-                <div
-                  key={i}
-                  className="bg-gray-800 p-4 rounded-xl shadow-lg hover:scale-105 transition-transform"
-                >
-                  <img
-                    src={p.img}
-                    alt={p.nombre}
-                    className="rounded-lg w-full h-60 object-cover"
-                  />
-                  <h3 className="text-xl font-semibold mt-4 text-center">{p.nombre}</h3>
-                  <p className="text-blue-400 font-bold text-center mt-2">{p.precio}</p>
-                  <p className="text-gray-400 text-sm mt-2 text-justify">{p.desc}</p>
-                  <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-full">
-                    Comprar
-                  </button>
-                </div>
-              ))}
-            </div>
-
-            <footer className="mt-12 text-center text-gray-500">
-              © 2025 NEXO. Todos los derechos reservados.
-            </footer>
-          </section>
-        );
-      }
-
-      ReactDOM.createRoot(document.getElementById("root")).render(<Audifonos />);
-    </script>
-  </body>
-</html>
+            desc: "Bluetooth 5.2, cancelación activ
