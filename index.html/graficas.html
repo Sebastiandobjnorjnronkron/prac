@@ -1,104 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tarjetas Gráficas - NEXO</title>
-    <link rel="stylesheet" href="style.css" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React + Babel -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body>
-    <header>
-      <div class="contenedor-header">
-        <h1 class="logo"><span class="mando">🎮</span> NEXO</h1>
 
-        <!-- Botón hamburguesa -->
-        <button class="menu-toggle" aria-label="Abrir menú">☰</button>
-
-        <nav class="menu">
-          <a href="index.html">Inicio</a>
-          <a href="mouse.html">Mouse</a>
-          <a href="teclados.html">Teclados</a>
-          <a href="graficas.html">Tarjetas Gráficas</a>
-          <a href="audifonos.html">Audífonos</a>
-          <a href="juego.html">Juego</a>
-          <a href="contacto.html">Contacto</a>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <h2>💠 Tarjetas Gráficas</h2>
-      <div class="grid-productos">
-        <div class="card">
-          <img src="imagen72.jpg" alt="GTX 1660 Super" />
-          <h3>GTX 1660 Super</h3>
-          <p class="precio">S/ 950.00</p>
-          <p class="desc">
-            6GB GDDR6, bus 192-bit, frecuencia boost ~1785 MHz, refrigeración
-            dual-fan, consumo moderado — ideal para 1080p alto.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
-
-        <div class="card">
-          <img src="imagen73.jpg" alt="RTX 3060 Ti" />
-          <h3>RTX 3060 Ti</h3>
-          <p class="precio">S/ 1,850.00</p>
-          <p class="desc">
-            8GB GDDR6, soporte Ray Tracing y DLSS, frecuencia boost alta,
-            salidas DisplayPort/HDMI, buena eficiencia por vatio para 1440p.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
-
-        <div class="card">
-          <img src="imagen74.jpg" alt="RTX 4070 Super" />
-          <h3>RTX 4070 Super</h3>
-          <p class="precio">S/ 3,200.00</p>
-          <p class="desc">
-            12GB GDDR6X, trazado de rayos avanzado, excelente rendimiento en
-            1440p/4K moderado, refrigeración robusta y soporte para creación de
-            contenido.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
-
-        <div class="card">
-          <img src="imagen75.jpg" alt="RX 6700 XT" />
-          <h3>RX 6700 XT</h3>
-          <p class="precio">S/ 1,950.00</p>
-          <p class="desc">
-            12GB GDDR6, arquitectura RDNA2, rendimiento sólido en 1440p y buen
-            precio/prestaciones para juegos actuales.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
-
-        <div class="card">
-          <img src="imagen76.webp" alt="RTX 3080" />
-          <h3>RTX 3080</h3>
-          <p class="precio">S/ 2,750.00</p>
-          <p class="desc">
-            10GB GDDR6X, alto rendimiento en 4K, múltiples salidas,
-            refrigeración avanzada y adecuada para gaming extremo y streaming.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
-
-        <div class="card">
-          <img src="imagen72.jpg" alt="RTX 4090" />
-          <h3>RTX 4090</h3>
-          <p class="precio">S/ 6,500.00</p>
-          <p class="desc">
-            24GB GDDR6X, máximo rendimiento para 4K/8K, ideal para creación
-            profesional, IA y simulaciones pesadas.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
-      </div>
-    </main>
-
-    <footer>© 2025 NEXO. Todos los derechos reservados.</footer>
-    <script src="script.js"></script>
-  </body>
-</html>
+  <body class="bg-gray-900 text-white font-[Poppins]">
+    <header class="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4">
+      <div
+        class="max-w-7
