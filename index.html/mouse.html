@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Gamer - NEXO</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React + Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body class="bg-gray-900 text-white font-[Poppins]">
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // ==== HEADER ====
+      const Header = () => (
+        <header className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4 sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 flex justify-between items-center flex-wrap">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">🎮 NEXO</h1>
+
+            <button id="menu-toggle" className="md:hidden border border-cyan-400 text-cyan-400 px-3 py-1 rounded-lg text-lg">
+              ☰
+            </button>
+
+            <nav id="menu" className="hidden md:flex flex-wrap justify-center gap-4 text-sm font-semibold">
+              <a href="index.html" className="hover:text-cyan-400">Inicio</a>
+              <a href="mouse.html" className="text-cyan-400 font-bold">Mouse</a>
+              <a href="teclados.html" className="hover:text-cyan-400">Teclados</a>
+              <a href="graficas.html" className="hover:text-cyan-400">Gráficas</a>
+              <a href="audifonos.html" className="hover:text-cyan-400">Audífonos</a>
+              <a href="juego.html" className="hover:text-cyan-400">Juego</a>
+              <a href="contacto.html" className="hover:text-cyan-400">Contacto</a>
+            </nav>
+          </div>
+        </header>
+      );
+
+      // ==== PRODUCTO ====
+      const Producto = ({ nombre, precio, desc, img }) => (
+        <div className="bg-gray-800 rounded-xl p-5 shadow-lg hover:shadow-cyan-500/30 hover:-translate-y-1 transition duration-300">
+          <img src={img} alt={nombre} className="rounded-lg w-full mb-3 h-48 object-cover" />
+          <h3 className="text-lg font-semibold">{nombre}</h3>
+          <p className="text-cyan-400 font-bold mb-1">{precio}</p>
+          <p className="text-gray-300 text-sm mb-3">{desc}</p>
+          <button
+            onClick={() => alert('🛒 Compra próximamente disponible en NEXO Store.')}
+            className="bg-gradient-to-r from-cyan-400 to-purple-600 px-4 py-2 rounded-md text-white font-semibold hover:scale-105 transition"
+          >
+            Comprar
+          </button>
+        </div>
+      );
+
+      // ==== APP ====
+      function Mouse() {
+        const productos = [
+          {
+            nombre: 'Mouse RGB Pro',
+            precio: 'S/ 120.00',
+            desc: 'Sensor óptico 16.000 DPI, luces RGB dinámicas y cable trenzado.',
+            img: 'imagen9.jpg',
+          },
+          {
+            nombre: 'Mouse Inalámbrico Ultra',
+            precio: 'S/ 180.00',
+            desc: 'Conectividad 2.4GHz / Bluetooth 5.0, batería 70h y polling 1000Hz.',
+            img: 'imagen2.jpg',
+          },
+          {
+            nombre: 'Mouse Ultraligero',
+            precio: 'S/ 150.00',
+            desc: 'Peso 69g, sensor PMW3360 y cable paracord flexible.',
+            img: 'imagen3.jpg',
+          },
+          {
+            nombre: 'Mouse Compacto',
+            precio: 'S/ 90.00',
+            desc: 'Diseño ambidiestro, sensor 8.000 DPI y conexión USB-C plug & play.',
+            img: 'imagen6.jpg',
+          },
+        ];
+
+        return (
+          <div>
+            <Header />
+            <main className="max-w-7xl mx-auto px-4 py-10">
+              <h2 className="text-3xl font-bold text-center mb-10 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+                🖱 Mouse Gamer
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {productos.map((p) => (
+                  <Producto key={p.nombre} {...p} />
+                ))}
+              </div>
+            </main>
+            <footer className="text-center text-gray-400 text-sm py-6 bg-gray-800 bg-opacity-50 mt-10">
+              © 2025 NEXO. Todos los derechos reservados.
+            </footer>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<Mouse />);
+
+      document.getElementById('menu-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('menu');
+        menu.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>
