@@ -1,146 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NEXO</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEXO - Inicio (React + Tailwind)</title>
 
-    <!-- Fuente Poppins -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="stylesheet" href="style.css" />
+    <!-- React + Babel -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body>
-    <header>
-      <div class="contenedor-header">
-        <h1 class="logo"><span class="mando">🎮</span> NEXO</h1>
 
-        <!-- Botón hamburguesa -->
-        <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+  <body class="bg-gray-900 text-white font-[Poppins]">
+    <header class="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4">
+      <div
+        class="max-w-7xl mx-auto px-4 flex justify-between items-center flex-wrap"
+      >
+        <h1
+          class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"
+        >
+          🎮 NEXO
+        </h1>
 
-        <nav class="menu">
-          <a href="index.html" class="activo">Inicio</a>
-          <a href="mouse.html">Mouse</a>
-          <a href="teclados.html">Teclados</a>
-          <a href="graficas.html">Tarjetas Gráficas</a>
-          <a href="audifonos.html">Audífonos</a>
-          <a href="juego.html">Juego</a>
-          <a href="contacto.html">Contacto</a>
+        <button
+          class="menu-toggle border-2 border-cyan-400 text-cyan-400 rounded-lg px-3 py-1 text-lg md:hidden"
+        >
+          ☰
+        </button>
+
+        <nav
+          class="menu hidden md:flex flex-wrap justify-center gap-4 text-sm font-semibold"
+        >
+          <a href="index.html" class="text-cyan-400 font-bold">Inicio</a>
+          <a href="mouse.html" class="hover:text-cyan-400">Mouse</a>
+          <a href="teclados.html" class="hover:text-cyan-400">Teclados</a>
+          <a href="graficas.html" class="hover:text-cyan-400">Gráficas</a>
+          <a href="audifonos.html" class="hover:text-cyan-400">Audífonos</a>
+          <a href="juego.html" class="hover:text-cyan-400">Juego</a>
+          <a href="contacto.html" class="hover:text-cyan-400">Contacto</a>
         </nav>
       </div>
     </header>
 
-    <main>
-      <section class="hero">
-        <div class="hero-text">
-          <h2>Equipa tu setup con lo mejor — bienvenido a NEXO</h2>
-          <p>
-            En <strong>NEXO</strong> conectamos tecnología, rendimiento y
-            estilo. Ofrecemos periféricos y componentes seleccionados por su
-            calidad, diseño y relación precio-rendimiento.
-          </p>
-          <p>
-            Desde gamers competitivos hasta creadores de contenido, aquí
-            encontrarás lo que necesitas para llevar tu experiencia al siguiente
-            nivel.
-          </p>
-        </div>
-        <img src="imagen55.jpg" alt="Setup gamer" />
-      </section>
+    <main id="root" class="max-w-7xl mx-auto px-4 py-10"></main>
 
-      <h2>Productos Destacados</h2>
-      <div class="grid-productos">
-        <!-- Mouse destacado -->
-        <div class="card">
-          <img src="imagen3.jpg" alt="Mouse RGB Pro" />
-          <h3>Mouse RGB Pro</h3>
-          <p>S/ 120.00</p>
-          <p class="desc">
-            Sensor óptico de 16.000 DPI, cable trenzado de 1.8m y luces RGB
-            dinámicas.
-          </p>
-          <p class="why">
-            <strong>Por qué:</strong> Precisión milimétrica y comodidad ideal
-            para partidas intensas.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
+    <footer
+      class="text-center text-gray-400 text-sm py-6 bg-gray-800 bg-opacity-50 mt-10"
+    >
+      © 2025 NEXO. Todos los derechos reservados.
+    </footer>
 
-        <!-- Teclado destacado -->
-        <div class="card">
-          <img src="imagen11.jpg" alt="Teclado Mecánico RGB" />
-          <h3>Teclado Mecánico RGB</h3>
-          <p>S/ 180.00</p>
-          <p class="desc">
-            Switches mecánicos, retroiluminación RGB por tecla y diseño de
-            aluminio reforzado.
-          </p>
-          <p class="why">
-            <strong>Por qué:</strong> Respuesta rápida y durabilidad garantizada
-            para gamers exigentes.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
+    <script type="text/babel">
+      function Hero() {
+        return (
+          <section className="flex flex-col lg:flex-row items-center justify-between mb-16 gap-6">
+            <div className="flex-1">
+              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mb-4">
+                Equipa tu setup con lo mejor — Bienvenido a NEXO
+              </h2>
+              <p className="text-gray-300 mb-4">
+                En <strong>NEXO</strong> conectamos tecnología, rendimiento y
+                estilo. Ofrecemos periféricos seleccionados por su calidad y
+                diseño gamer.
+              </p>
+              <p className="text-gray-400 mb-6">
+                Desde gamers competitivos hasta creadores de contenido, aquí
+                encontrarás lo que necesitás para llevar tu experiencia al
+                siguiente nivel.
+              </p>
+              <a
+                href="mouse.html"
+                className="inline-block bg-gradient-to-r from-cyan-400 to-purple-600 px-5 py-3 rounded-md font-semibold hover:scale-105 transition"
+              >
+                Ver productos
+              </a>
+            </div>
 
-        <!-- Tarjeta gráfica destacada -->
-        <div class="card">
-          <img src="imagen72.jpg" alt="Tarjeta Gráfica GTX" />
-          <h3>Tarjeta Gráfica GTX</h3>
-          <p>S/ 950.00</p>
-          <p class="desc">
-            6GB GDDR6, sistema dual-fan silencioso, excelente rendimiento 1080p.
-          </p>
-          <p class="why">
-            <strong>Por qué:</strong> Potencia sólida con gran relación
-            calidad/precio.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
+            <img
+              src="imagen55.jpg"
+              alt="Setup gamer"
+              className="flex-1 rounded-2xl shadow-lg shadow-cyan-500/20"
+            />
+          </section>
+        );
+      }
 
-        <!-- Audífono destacado -->
-        <div class="card">
-          <img src="96.jpg" alt="Audífonos RGB Pro" />
-          <h3>Audífonos RGB Pro</h3>
-          <p>S/ 220.00</p>
-          <p class="desc">
-            Sonido envolvente 7.1, micrófono retráctil y luces RGB con efecto
-            respiración.
-          </p>
-          <p class="why">
-            <strong>Por qué:</strong> Audio nítido y comodidad total para largas
-            sesiones de juego.
-          </p>
-          <button class="btn-comprar">Comprar</button>
-        </div>
-      </div>
+      const productos = [
+        {
+          nombre: "Mouse RGB Pro",
+          precio: "S/ 120.00",
+          img: "imagen3.jpg",
+          desc: "Sensor óptico 16.000 DPI y luces RGB dinámicas.",
+        },
+        {
+          nombre: "Teclado Mecánico RGB",
+          precio: "S/ 180.00",
+          img: "imagen11.jpg",
+          desc: "Switches mecánicos y retroiluminación RGB por tecla.",
+        },
+        {
+          nombre: "Tarjeta Gráfica GTX",
+          precio: "S/ 950.00",
+          img: "imagen72.jpg",
+          desc: "6GB GDDR6, excelente rendimiento 1080p.",
+        },
+        {
+          nombre: "Audífonos RGB Pro",
+          precio: "S/ 220.00",
+          img: "96.jpg",
+          desc: "Sonido envolvente 7.1 y micrófono retráctil.",
+        },
+      ];
 
-      <!-- Botón Ver más -->
-      <div style="text-align: center; margin-top: 30px">
-        <a
-          href="mouse.html"
-          style="
-            display: inline-block;
-            background: linear-gradient(90deg, #00bfff, #5a00ff);
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-          "
-          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 15px rgba(0,191,255,0.5)';"
-          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';"
-        >
-          Ver más productos
-        </a>
-      </div>
-    </main>
+      function Producto({ nombre, precio, img, desc }) {
+        return (
+          <div className="bg-gray-800 rounded-xl p-4 shadow-md hover:shadow-cyan-500/30 hover:-translate-y-1 transition">
+            <img
+              src={img}
+              alt={nombre}
+              className="rounded-lg w-full mb-3 h-48 object-cover"
+            />
+            <h3 className="text-lg font-semibold">{nombre}</h3>
+            <p className="text-cyan-400 font-bold mb-1">{precio}</p>
+            <p className="text-gray-300 text-sm mb-3">{desc}</p>
+            <button className="bg-gradient-to-r from-cyan-400 to-purple-600 px-4 py-2 rounded-md text-white font-semibold hover:scale-105 transition">
+              Comprar
+            </button>
+          </div>
+        );
+      }
 
-    <footer>© 2025 NEXO. Todos los derechos reservados.</footer>
+      function App() {
+        return (
+          <div>
+            <Hero />
+            <h2 className="text-3xl font-bold text-center mb-10 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+              Productos Destacados
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {productos.map((p) => (
+                <Producto key={p.nombre} {...p} />
+              ))}
+            </div>
+          </div>
+        );
+      }
 
-    <script src="script.js"></script>
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
   </body>
 </html>
+
