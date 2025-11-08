@@ -1,35 +1,34 @@
-// script.js - sin carrito
+// script.js - versión estable universal (sin carrito)
 document.addEventListener("DOMContentLoaded", () => {
-  // Botones de compra: muestran aviso (no hay carrito)
+  // === BOTONES DE COMPRA ===
   document.querySelectorAll(".btn-comprar").forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      // Si el botón es parte del juego o formulario, ignorar (game tiene su propio script)
+      // Evitar interferir con el juego o formularios
       if (btn.id === "startGame" || btn.closest(".game-container")) return;
       e.preventDefault();
-      alert("Compra próximamente disponible. Contáctanos para reservar.");
+      alert("🛒 Compra próximamente disponible. Contáctanos para reservar.");
     });
   });
 
-  // Contact form: evitar envío real, mostrar confirmación simulada
+  // === FORMULARIO DE CONTACTO (solo si existe) ===
   const contactForm = document.querySelector(".contact-form form");
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      // puedes reemplazar esto por integración con Formspree o EmailJS si quieres
-      alert(
-        "Gracias — tu mensaje fue enviado (simulado). Nos comunicaremos pronto."
-      );
+      alert("📩 Gracias — tu mensaje fue enviado (simulado). Nos comunicaremos pronto.");
       contactForm.reset();
     });
   }
 
-  // Marcar enlace activo en el menú según URL
-  const links = document.querySelectorAll("header nav a");
-  links.forEach((a) => {
-    try {
+  // === ENLACE ACTIVO EN MENÚ ===
+  try {
+    const currentPage = location.pathname.split("/").pop() || "index.html";
+    const links = document.querySelectorAll("header nav a");
+
+    links.forEach((a) => {
       const href = a.getAttribute("href");
       if (
-        href === location.pathname.split("/").pop() ||
+        href === currentPage ||
         (href === "index.html" &&
           (location.pathname === "/" ||
             location.pathname.endsWith("index.html")))
@@ -38,19 +37,23 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         a.classList.remove("activo");
       }
-    } catch (err) {
-      /* ignore */
-    }
-  });
-});
-// === Menú hamburguesa ===
-document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.querySelector(".menu-toggle");
-  const menu = document.querySelector("nav.menu");
-
-  if (toggle && menu) {
-    toggle.addEventListener("click", () => {
-      menu.classList.toggle("activo");
     });
+  } catch (err) {
+    console.warn("⚠️ Error al marcar enlace activo:", err);
+  }
+
+  // === MENÚ HAMBURGUESA ===
+  try {
+    const toggle = document.querySelector(".menu-toggle, #menu-toggle");
+    const menu = document.querySelector("nav.menu, #menu");
+
+    if (toggle && menu) {
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("activo");
+        menu.classList.toggle("hidden"); // compatibilidad con Tailwind
+      });
+    }
+  } catch (err) {
+    console.warn("⚠️ Error en el menú hamburguesa:", err);
   }
 });
