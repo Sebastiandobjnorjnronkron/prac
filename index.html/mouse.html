@@ -21,15 +21,62 @@
   </head>
 
   <body class="bg-gray-900 text-white font-[Poppins]">
-    <header class="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4">
-      <div
-        class="max-w-7xl mx-auto px-4 flex justify-between items-center flex-wrap"
-      >
-        <h1
-          class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent"
-        >
-          🎮 NEXO
-        </h1>
+    <div id="root"></div>
 
-        <button
-          class="menu-toggle border-2 border-cyan-400 text-cyan-400 rounded-lg px-3 py-1 text-lg
+    <script type="text/babel">
+      const App = () => (
+        <div>
+          {/* HEADER */}
+          <header className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-md py-4">
+            <div className="max-w-7xl mx-auto px-4 flex justify-between items-center flex-wrap">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+                🎮 NEXO
+              </h1>
+
+              <nav className="space-x-5 text-sm sm:text-base">
+                <a href="index.html" className="hover:text-cyan-400">
+                  Inicio
+                </a>
+                <a href="mouse-react.html" className="text-cyan-400 font-semibold">
+                  Mouse
+                </a>
+                <a href="teclados.html" className="hover:text-cyan-400">
+                  Teclados
+                </a>
+                <a href="graficas.html" className="hover:text-cyan-400">
+                  Tarjetas Gráficas
+                </a>
+                <a href="audifonos.html" className="hover:text-cyan-400">
+                  Audífonos
+                </a>
+                <a href="juego.html" className="hover:text-cyan-400">
+                  Juego
+                </a>
+                <a href="contacto.html" className="hover:text-cyan-400">
+                  Contacto
+                </a>
+              </nav>
+            </div>
+          </header>
+
+          {/* MAIN */}
+          <main className="max-w-7xl mx-auto px-6 py-10">
+            <h2 className="text-3xl font-bold text-cyan-400 mb-8">🖱 Mouse Gamer</h2>
+
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {[
+                {
+                  img: "imagen9.jpg",
+                  nombre: "Mouse RGB Pro",
+                  precio: "S/ 120.00",
+                  desc: "Sensor óptico 16.000 DPI, cable trenzado, luces RGB dinámicas y botones programables.",
+                },
+                {
+                  img: "imagen2.jpg",
+                  nombre: "Mouse Inalámbrico Gamer",
+                  precio: "S/ 180.00",
+                  desc: "Conectividad 2.4GHz y Bluetooth, batería 70h, polling rate 1000Hz, ideal para torneos.",
+                },
+                {
+                  img: "imagen3.jpg",
+
