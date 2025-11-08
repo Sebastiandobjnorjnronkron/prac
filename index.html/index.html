@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEXO – Gaming Store</title>
+
+    <!-- Fuente -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* === CONFIGURACIÓN BASE === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #0a0a0a;
+        color: #fff;
+        overflow-x: hidden;
+        transition: background 0.5s, color 0.5s;
+      }
+
+      /* === HEADER === */
+      header {
+        background: rgba(20, 20, 20, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .logo {
+        font-weight: 700;
+        font-size: 1.8rem;
+        background: linear-gradient(90deg, #00bfff, #b026ff);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+      nav a {
+        color: #ccc;
+        margin: 0 0.8rem;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #00bfff;
+        text-shadow: 0 0 10px #00bfff;
+      }
+
+      /* === HERO === */
+      .hero {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4rem 10%;
+      }
+      .hero img {
+        width: 400px;
+        border-radius: 15px;
+        box-shadow: 0 0 40px rgba(0, 191, 255, 0.3);
+        transition: transform 0.3s;
+      }
+      .hero img:hover {
+        transform: scale(1.05);
+      }
+      .hero-text {
+        max-width: 500px;
+        animation: fadeInUp 1.2s ease;
+      }
+      .hero-text h2 {
+        font-size: 2.2rem;
+        background: linear-gradient(90deg, #00bfff, #b026ff, #00bfff);
+        -webkit-background-clip: text;
+        color: transparent;
+        background-size: 200%;
+        animation: gradientMove 4s infinite linear;
+        margin-bottom: 1rem;
+      }
+      .hero-text p {
+        color: #ccc;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* === PRODUCTO DESTACADO === */
+      .destacado {
+        background: radial-gradient(circle at top left, #0ff1, transparent);
+        padding: 3rem 10%;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .destacado h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #00bfff;
+      }
+      .destacado img {
+        width: 250px;
+        border-radius: 15px;
+        box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
+        margin-bottom: 1rem;
+      }
+      .destacado p {
+        color: #ccc;
+        margin-bottom: 1rem;
+      }
+      .btn-destacado {
+        background: linear-gradient(90deg, #00bfff, #b026ff);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .btn-destacado:hover {
+        transform: scale(1.05);
+      }
+
+      /* === PRODUCTOS === */
+      h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin: 3rem 0 1rem;
+        color: #00bfff;
+      }
+      .grid-productos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 0 2rem 3rem;
+      }
+      .card {
+        background: #181818;
+        border-radius: 10px;
+        padding: 1rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.15);
+      }
+      .card:hover {
+        transform: translateY(-6px) rotate3d(1, 1, 0, 3deg);
+        box-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+      }
+      .card img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+      }
+      .btn-comprar {
+        background: linear-gradient(90deg, #00bfff, #b026ff);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .btn-comprar:hover {
+        transform: scale(1.05);
+      }
+
+      /* === POP-UP === */
+      .popup {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #111;
+        border: 1px solid #00bfff;
+        border-radius: 10px;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s;
+        z-index: 100;
+      }
+      .popup.visible {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .popup button {
+        background: linear-gradient(90deg, #00bfff, #b026ff);
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+
+      /* === FOOTER === */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: #aaa;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* === RESPONSIVE === */
+      @media (max-width: 768px) {
+        .hero {
+          flex-direction: column;
+          text-align: center;
+        }
+        .hero img {
+          margin-top: 2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">🎮 NEXO</div>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="mouse.html">Mouse</a>
+        <a href="teclados.html">Teclados</a>
+        <a href="graficas.html">Gráficas</a>
+        <a href="audifonos.html">Audífonos</a>
+        <a href="juego.html">Juego</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <h2>Potencia tu mundo gamer con tecnología que responde a tu nivel</h2>
+          <p>
+            En <strong>NEXO</strong> seleccionamos hardware de alto rendimiento para
+            jugadores, creadores y soñadores digitales. Tecnología, diseño y estilo se
+            combinan para potenciar tu experiencia.
+          </p>
+          <p>
+            Somos más que una tienda gamer. Somos el nexo entre tú y la próxima
+            generación del rendimiento.
+          </p>
+        </div>
+        <img src="imagen55.jpg" alt="Setup gamer" />
+      </section>
+
+      <section class="destacado">
+        <h3>🔥 Producto Destacado del Mes</h3>
+        <img src="imagen3.jpg" alt="Mouse RGB Pro" />
+        <p>
+          Mouse RGB Pro — Precisión, velocidad y estilo. Nuestro top seller para gamers
+          competitivos.
+        </p>
+        <button class="btn-destacado">Ver más</button>
+      </section>
+
+      <h2>Productos Destacados</h2>
+      <div class="grid-productos">
+        <div class="card">
+          <img src="imagen3.jpg" alt="Mouse RGB Pro" />
+          <h3>Mouse RGB Pro</h3>
+          <p>S/ 120.00</p>
+          <p>Sensor óptico 16.000 DPI, cable trenzado y luces RGB dinámicas.</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="imagen11.jpg" alt="Teclado Mecánico" />
+          <h3>Teclado Mecánico RGB</h3>
+          <p>S/ 180.00</p>
+          <p>Switches mecánicos, RGB por tecla y chasis metálico premium.</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="imagen72.jpg" alt="Gráfica GTX" />
+          <h3>GTX 1660 Super</h3>
+          <p>S/ 950.00</p>
+          <p>Rendimiento brutal en 1080p. Doble ventilador y eficiencia térmica.</p>
+          <button class="btn-comprar">Comprar</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>© 2025 NEXO. Más de <span id="contador">5000</span> gamers confían en nosotros 💪</footer>
+
+    <div class="popup" id="popup">
+      🔥 Gamer, este mes los <strong>teclados</strong> tienen 20 % de descuento.
+      <button onclick="window.location='teclados.html'">Ver</button>
+    </div>
+
+    <script>
+      // === POP-UP APARICIÓN AUTOMÁTICA ===
+      setTimeout(() => {
+        document.getElementById("popup").classList.add("visible");
+      }, 10000);
+
+      // === CONTADOR DINÁMICO ===
+      let count = 5000;
+      setInterval(() => {
+        count += Math.floor(Math.random() * 5);
+        document.getElementById("contador").textContent = count;
+      }, 2000);
+
+      // === MODO OSCURO/AUTOMÁTICO SEGÚN HORA ===
+      const hour = new Date().getHours();
+      if (hour >= 6 && hour < 18) {
+        document.body.style.background = "#f5f5f5";
+        document.body.style.color = "#111";
+      } else {
+        document.body.style.background = "#0a0a0a";
+        document.body.style.color = "#fff";
+      }
+    </script>
+  </body>
+</html>
