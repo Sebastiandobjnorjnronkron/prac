@@ -8,15 +8,9 @@
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- React + Babel -->
-    <script
-      src="https://unpkg.com/react@18/umd/react.development.js"
-      crossorigin
-    ></script>
-    <script
-      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-      crossorigin
-    ></script>
+    <!-- React + ReactDOM + Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <!-- Framer Motion (animaciones) -->
@@ -32,10 +26,10 @@
   <body class="bg-gray-900 text-white font-[Poppins]">
     <div id="root"></div>
 
-    <script type="text/babel">
+    <!-- ✅ Babel ahora sabe que esto es JSX -->
+    <script type="text/babel" data-presets="react">
       const { motion } = window["framerMotion"];
 
-      // COMPONENTE HEADER
       const Header = ({ cartCount, toggleTheme }) => (
         <header className="bg-gray-800 bg-opacity-60 backdrop-blur-md shadow-md py-4 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
@@ -46,18 +40,14 @@
             <nav className="hidden md:flex space-x-5 text-sm sm:text-base">
               {[
                 ["Inicio", "index.html"],
-                ["Mouse", "mouse-react.html"],
+                ["Mouse", "mouse.html"],
                 ["Teclados", "teclados.html"],
-                ["Gráficas", "graficas-react.html"],
+                ["Gráficas", "graficas.html"],
                 ["Audífonos", "audifonos.html"],
                 ["Juego", "juego.html"],
                 ["Contacto", "contacto.html"],
               ].map(([name, link], i) => (
-                <a
-                  key={i}
-                  href={link}
-                  className="hover:text-cyan-400 transition-colors"
-                >
+                <a key={i} href={link} className="hover:text-cyan-400 transition-colors">
                   {name}
                 </a>
               ))}
@@ -83,17 +73,12 @@
         </header>
       );
 
-      // COMPONENTE PRODUCTO
       const ProductCard = ({ item, addToCart }) => (
         <motion.div
           className="bg-gray-800 rounded-xl p-5 text-center shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-2 transition-transform duration-300"
           whileHover={{ scale: 1.05 }}
         >
-          <img
-            src={item.img}
-            alt={item.nombre}
-            className="rounded-lg mb-4 mx-auto"
-          />
+          <img src={item.img} alt={item.nombre} className="rounded-lg mb-4 mx-auto" />
           <h3 className="text-xl font-semibold mb-1">{item.nombre}</h3>
           <p className="text-cyan-300 font-medium mb-2">{item.precio}</p>
           <p className="text-sm text-gray-400 mb-3">{item.desc}</p>
@@ -106,8 +91,7 @@
         </motion.div>
       );
 
-      // COMPONENTE TOP VENTAS
-      const TopSales = () => (
+      const TopSales = ({ addToCart }) => (
         <motion.section
           className="max-w-7xl mx-auto px-6 py-10 mt-10 bg-gray-800 bg-opacity-40 rounded-2xl"
           initial={{ opacity: 0, y: 40 }}
@@ -138,13 +122,12 @@
                 desc: "Audio envolvente con iluminación RGB.",
               },
             ].map((item, i) => (
-              <ProductCard key={i} item={item} addToCart={() => {}} />
+              <ProductCard key={i} item={item} addToCart={addToCart} />
             ))}
           </div>
         </motion.section>
       );
 
-      // APP PRINCIPAL
       const App = () => {
         const [cart, setCart] = React.useState([]);
         const [darkMode, setDarkMode] = React.useState(true);
@@ -160,10 +143,7 @@
 
         return (
           <>
-            <Header
-              cartCount={cart.length}
-              toggleTheme={toggleTheme}
-            />
+            <Header cartCount={cart.length} toggleTheme={toggleTheme} />
             <motion.main
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -182,5 +162,7 @@
     </script>
   </body>
 </html>
+
+
 
 
